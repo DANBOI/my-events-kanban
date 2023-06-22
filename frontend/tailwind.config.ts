@@ -15,6 +15,10 @@ module.exports = {
         secondary: "#202020",
         accent: "#03be9f",
       },
+      backgroundImage: {
+        //make bg-img darker
+        hero: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.4)),url('~/assets/img/hero.jpg')`,
+      },
     },
   },
   plugins: [],
