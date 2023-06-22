@@ -19,8 +19,8 @@
           size="1.5em"
           name="mdi:chevron-right"
           class="transition group-hover:translate-x-1"
-        ></Icon
-      ></NuxtLink>
+        />
+      </NuxtLink>
     </section>
 
     <section class="container mx-auto py-10 text-center">

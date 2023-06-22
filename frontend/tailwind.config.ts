@@ -17,7 +17,7 @@ module.exports = {
       },
       backgroundImage: {
         //make bg-img darker
-        hero: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.4)),url('~/assets/img/hero.jpg')`,
+        hero: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.4)),url('/img/hero.jpg')`,
       },
     },
   },

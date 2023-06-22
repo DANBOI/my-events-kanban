@@ -2,7 +2,8 @@
   <header :class="getHeaderClass()">
     <div class="container mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/" class="text-3xl font-semibold text-white"
-        ><img src="/logo.svg" alt="logo" class="inline" /> NuxtEvents</NuxtLink
+        ><nuxt-img src="/logo.svg" alt="logo" class="inline" />
+        NuxtEvents</NuxtLink
       >
       <nav class="flex items-center gap-8">
         <NuxtLink to="/login" class="text-primary transition hover:text-accent"
@@ -25,6 +26,6 @@ const route = useRoute();
 //change header class based on page path
 const getHeaderClass = () =>
   route.path !== "/"
-    ? "sticky bg-gradient-to-r from-secondary/80 to-black"
+    ? "sticky shadow-lg bg-gradient-to-r from-secondary/80 to-black"
     : "fixed w-full";
 </script>

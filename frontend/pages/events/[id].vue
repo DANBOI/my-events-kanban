@@ -11,8 +11,8 @@
       <div
         class="h-40 w-40 overflow-hidden rounded-full border-4 border-white md:h-80 md:w-80"
       >
-        <img
-          src="~/assets/img/coding-event.jpg"
+        <nuxt-img
+          src="/img/coding-event.jpg"
           alt="image"
           class="h-full w-full object-cover"
         />
@@ -26,13 +26,16 @@
           class="flex flex-col items-center text-2xl md:items-start md:text-start"
         >
           <span class="block">
-            <Icon name="icon" class="h-6 w-6 text-accent" />
+            <Icon
+              name="material-symbols:pin-drop-outline"
+              class="h-6 w-6 text-accent"
+            />
           </span>
-          <span class="block"><time>date date date</time></span>
+          <span class="block"><time>location</time></span>
         </li>
       </ul>
     </figure>
-    <div class="mx-auto mt-32 w-[90%] max-w-2xl text-center text-2xl">
+    <div class="mx-auto mt-20 w-[90%] max-w-2xl text-center text-2xl">
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis
         officiis minus, vel laborum delectus eius temporibus harum. Minima minus
@@ -40,8 +43,13 @@
         doloremque similique.
       </p>
     </div>
-    <button>
-     submit
-    </butto>
+    <div class="mx-auto my-12 w-[90%] max-w-2xl text-center">
+      <button
+        type="submit"
+        class="rounded bg-accent px-6 py-2 text-xl font-medium text-white shadow-md hover:bg-accent/80 active:bg-accent/80 md:text-2xl"
+      >
+        Apply to the event
+      </button>
+    </div>
   </main>
 </template>
