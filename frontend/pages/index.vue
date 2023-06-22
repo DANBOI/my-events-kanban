@@ -1,7 +1,7 @@
 <template>
   <main>
     <section
-      class="flex h-[max(500px,60vh)] flex-col items-center justify-center gap-8 bg-hero bg-cover bg-center text-center"
+      class="flex h-[max(480px,60vh)] flex-col items-center justify-center gap-8 bg-hero bg-cover bg-center text-center"
     >
       <h1
         class="bg-gradient-to-r from-primary to-accent bg-clip-text text-5xl font-bold text-transparent md:text-6xl"

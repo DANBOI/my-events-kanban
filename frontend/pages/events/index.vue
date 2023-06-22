@@ -1,8 +1,8 @@
 <template>
-  <div
+  <main
     class="container mx-auto grid justify-items-stretch gap-3 px-6 py-10 lg:grid-cols-4"
   >
-    <div
+    <aside
       class="rounded bg-gradient-to-br from-secondary/80 to-accent p-6 shadow-md"
     >
       <form class="relative">
@@ -39,9 +39,9 @@
           category
         </p>
       </div>
-    </div>
+    </aside>
 
-    <div class="lg:col-span-3">
+    <section class="lg:col-span-3">
       <div class="space-y-4">
         <EventCard />
         <EventCard />
@@ -49,6 +49,6 @@
         <EventCard />
         <EventCard />
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>

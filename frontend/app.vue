@@ -2,8 +2,7 @@
   <header :class="getHeaderClass()">
     <div class="container mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/" class="text-3xl font-semibold text-white"
-        ><img src="logo.svg" alt="Discover Nuxt 3" class="inline" />
-        NuxtEvents</NuxtLink
+        ><img src="/logo.svg" alt="logo" class="inline" /> NuxtEvents</NuxtLink
       >
       <nav class="flex items-center gap-8">
         <NuxtLink to="/login" class="text-primary transition hover:text-accent"
