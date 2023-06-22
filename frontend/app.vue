@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed w-full">
+  <header :class="getHeaderClass()">
     <div class="container mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/" class="text-3xl font-semibold text-white"
         ><img src="logo.svg" alt="Discover Nuxt 3" class="inline" />
@@ -17,6 +17,15 @@
       </nav>
     </div>
   </header>
-
   <NuxtPage />
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+// console.log("🚀 ~ file: app.vue:25 ~ route:", route.path);
+//change header class based on page path
+const getHeaderClass = () =>
+  route.path !== "/"
+    ? "sticky bg-gradient-to-r from-secondary/80 to-black"
+    : "fixed w-full";
+</script>
