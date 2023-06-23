@@ -1,6 +1,6 @@
 <template>
   <main
-    class="container mx-auto grid justify-items-stretch gap-3 px-6 py-10 lg:grid-cols-4"
+    class="container mx-auto grid justify-items-stretch gap-8 px-6 py-10 lg:grid-cols-4"
   >
     <aside
       class="rounded bg-gradient-to-br from-secondary/80 to-accent p-6 shadow-md"
@@ -29,13 +29,7 @@
     </aside>
 
     <section class="lg:col-span-3">
-      <div class="space-y-4">
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-      </div>
+      <EventList />
     </section>
   </main>
 </template>

@@ -26,6 +26,6 @@ const route = useRoute();
 //change header class based on page path
 const getHeaderClass = () =>
   route.path !== "/"
-    ? "sticky shadow-lg bg-gradient-to-r from-secondary/80 to-black"
+    ? "sticky top-0 shadow-lg bg-gradient-to-r from-secondary/80 to-black"
     : "fixed w-full";
 </script>

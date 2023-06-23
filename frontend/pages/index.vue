@@ -23,18 +23,9 @@
       </NuxtLink>
     </section>
 
-    <section class="container mx-auto py-10 text-center">
-      <h2 class="mb-8 text-4xl">Newest events</h2>
-
-      <div class="space-y-4">
-        <!-- <EventCard v-for="event in events" :key="event.id" :event="event" /> -->
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-      </div>
+    <section class="container mx-auto py-16 text-center">
+      <h2 class="mb-8 text-4xl">5 Newest events</h2>
+      <EventList />
     </section>
   </main>
 </template>

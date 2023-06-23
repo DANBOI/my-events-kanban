@@ -46,7 +46,7 @@
     <div class="mx-auto my-12 w-[90%] max-w-2xl text-center">
       <button
         type="submit"
-        class="rounded bg-accent px-6 py-2 text-xl font-medium text-white shadow-md hover:bg-accent/80 active:bg-accent/80 md:text-2xl"
+        class="rounded bg-accent px-6 py-2 text-xl font-medium text-white shadow-md hover:bg-accent/80 active:bg-accent/60 md:text-2xl"
       >
         Apply to the event
       </button>
