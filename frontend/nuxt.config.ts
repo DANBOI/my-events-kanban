@@ -1,7 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["nuxt-icon", "@nuxt/image"],
+  modules: ["nuxt-icon", "@nuxt/image", "@pinia/nuxt"],
+  pinia: {
+    autoImports: ["defineStore"],
+  },
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
