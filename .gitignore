@@ -18,6 +18,14 @@ logs
 .idea
 
 # Local env files
+env
 .env
 .env.*
 !.env.example
+
+#python Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+#Local DB
+*.sqlite3
