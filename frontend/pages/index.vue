@@ -8,7 +8,7 @@
       >
         Register and Explore<br />
         <span class="text-2xl font-thin text-white/80 md:text-3xl"
-          >tech events that are all around you!</span
+          >interesting events that are all around you!</span
         >
       </h1>
       <NuxtLink

@@ -3,20 +3,20 @@
     class="flex items-center justify-between rounded bg-white p-6 shadow-lg transition"
   >
     <div>
-      <h3 class="mb-2 text-xl font-semibold">title</h3>
-      <p class="text-secondary/80">category</p>
+      <h3 class="mb-2 text-xl font-semibold">{{ event.title }}</h3>
+      <p class="text-secondary/80">{{ event.category }}</p>
     </div>
 
     <div>
-      <p class="mb-2">location</p>
-      <p>fee</p>
+      <p class="mb-2">{{ event.date }}</p>
+      <p>{{ event.location }}</p>
     </div>
 
     <div>
-      <p>date</p>
+      <p>{{ event.participation_fee || "free" }}</p>
     </div>
     <div>
-      <p>img?</p>
+      <p>{{ event.img_url || "no image" }}</p>
     </div>
 
     <div v-if="editable" class="space-x-4 text-white">
@@ -31,7 +31,10 @@
   </article>
 </template>
 <script setup lang="ts">
-defineProps({
-  editable: Boolean,
-});
+import { Event } from "~/types";
+
+defineProps<{
+  event: Event;
+  editable?: Boolean;
+}>();
 </script>
