@@ -24,6 +24,23 @@ class NewestEventsView(APIView):
         return Response(serializer.data)
 
 
+class BrowseEventsView(APIView):
+    def get(self, request, format=None):
+        events = Event.objects.all()
+        categories = request.GET.get('categories', '')
+        search = request.GET.get('search', '')
+
+        if search:
+            events = events.filter(title__icontains=search)
+
+        if categories:
+            events = events.filter(category_id__in=categories.split(','))
+
+        serializer = EventSerializer(events, many=True)
+
+        return Response(serializer.data)
+
+
 class EventDetailView(APIView):
     def get(self, request, pk, format=None):
         # slice first 5 rows

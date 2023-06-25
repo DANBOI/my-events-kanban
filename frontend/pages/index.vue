@@ -25,21 +25,20 @@
 
     <section class="container mx-auto py-16 text-center">
       <h2 class="mb-8 text-4xl">Newest events</h2>
-      <EventList
-        :error="Boolean(error)"
-        :pending="pending"
-        :data="(data as Event[])"
-      />
+      <EventList :error="Boolean(error)" :pending="pending" :data="data" />
     </section>
   </main>
 </template>
 <script setup lang="ts">
 import { Event } from "~/types";
 const apiUrl = import.meta.env.VITE_BASE_URL;
-const { error, pending, data } = await useFetch(`${apiUrl}events/newest/`, {
-  lazy: true,
-  server: false, //don't use SSR here
-});
+const { error, pending, data } = await useFetch<Event[]>(
+  `${apiUrl}events/newest/`,
+  {
+    lazy: true,
+    server: false, //don't use SSR here
+  }
+);
 // console.log(error, pending, data);
 </script>
 <!-- ${process.env.BACKEND_API_URL} -->
