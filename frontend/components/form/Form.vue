@@ -1,6 +1,7 @@
 <template>
   <h1 class="mb-6 text-center text-4xl capitalize">{{ headerText }}</h1>
   <form
+    @submit.prevent="action?.()"
     class="mx-auto flex max-w-2xl flex-col gap-8 rounded bg-gradient-to-tl from-secondary to-accent p-10 shadow-lg"
   >
     <slot />
@@ -23,6 +24,7 @@
 const { footerText } = defineProps({
   headerText: String,
   actionLabel: String,
+  action: Function,
   footerText: String,
 });
 const [textLabel, linkLabel] =

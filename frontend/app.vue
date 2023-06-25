@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { useAuthStore } from "@/stores/authStore";
 const authStore = useAuthStore();
-const { token = "abc" } = authStore.authInfo;
+const { token } = authStore.authInfo;
 //change header class based on page path
 const route = useRoute();
 const navbarStyle = computed(() =>
