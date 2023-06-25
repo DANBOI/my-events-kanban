@@ -22,3 +22,12 @@ class NewestEventsView(APIView):
         serializer = EventSerializer(events, many=True)
 
         return Response(serializer.data)
+
+
+class EventDetailView(APIView):
+    def get(self, request, pk, format=None):
+        # slice first 5 rows
+        event = Event.objects.get(pk=pk)
+        serializer = EventSerializer(event, many=False)
+
+        return Response(serializer.data)
