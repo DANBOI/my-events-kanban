@@ -6,7 +6,7 @@
         NuxtEvents</NuxtLink
       >
       <nav class="flex items-center gap-8">
-        <template v-if="!token">
+        <template v-if="!authStore.authInfo.token">
           <NuxtLink
             to="/login"
             class="text-primary transition hover:text-accent"
@@ -29,7 +29,10 @@
             class="text-primary transition hover:text-accent"
             >My Events</NuxtLink
           >
-          <button @click="" class="text-primary transition hover:text-rose-500">
+          <button
+            @click="handdleLogout"
+            class="text-primary transition hover:text-rose-500"
+          >
             Log out
           </button>
         </template>
@@ -37,17 +40,28 @@
     </div>
   </header>
   <NuxtPage />
+  <Notifications />
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from "@/stores/authStore";
+import { useNotificationsStore } from "@/stores/notificationsStore";
+
 const authStore = useAuthStore();
-const { token } = authStore.authInfo;
-//change header class based on page path
+const notificationsStore = useNotificationsStore();
+const router = useRouter();
 const route = useRoute();
+
+//change header class based on page path
 const navbarStyle = computed(() =>
   route.path !== "/"
     ? "sticky top-0 shadow-lg bg-gradient-to-r from-secondary/80 to-black"
     : "fixed w-full"
 );
+
+const handdleLogout = () => {
+  authStore.clearAuthInfo();
+  notificationsStore.addNotification("logout!!");
+  router.push({ path: "/" });
+};
 </script>

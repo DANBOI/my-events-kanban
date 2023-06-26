@@ -11,16 +11,18 @@
           >interesting events that are all around you!</span
         >
       </h1>
-      <NuxtLink
-        to="/events"
-        class="group rounded bg-accent py-2 pl-10 pr-6 text-xl font-medium text-white active:bg-accent/80 md:text-2xl"
-      >
-        Browse<Icon
-          size="1.5em"
-          name="mdi:chevron-right"
-          class="transition group-hover:translate-x-1"
-        />
-      </NuxtLink>
+      <ClientOnly>
+        <NuxtLink
+          to="/events"
+          class="group rounded bg-accent py-2 pl-10 pr-6 text-xl font-medium text-white active:bg-accent/80 md:text-2xl"
+        >
+          Browse<Icon
+            size="1.5em"
+            name="mdi:chevron-right"
+            class="transition group-hover:translate-x-1"
+          />
+        </NuxtLink>
+      </ClientOnly>
     </section>
 
     <section class="container mx-auto py-16 text-center">

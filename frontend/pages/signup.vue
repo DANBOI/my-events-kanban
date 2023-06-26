@@ -5,7 +5,7 @@
     <Form
       headerText="welcome to kanban"
       actionLabel="sign up"
-      :action="haddleSubmit"
+      :action="haddleSignup"
       footerText="login"
     >
       <FormItem v-model="email" type="email" label="your email" />
@@ -25,11 +25,11 @@
 const router = useRouter();
 const apiUrl = import.meta.env.VITE_BASE_URL;
 
-let email = ref("");
-let password = ref("");
-let errors = ref<string[]>([]);
+const email = ref("");
+const password = ref("");
+const errors = ref<string[]>([]);
 
-async function haddleSubmit() {
+const haddleSignup = async () => {
   errors.value = [];
   console.log(email.value, password.value);
   await $fetch(`${apiUrl}users/`, {
@@ -41,7 +41,6 @@ async function haddleSubmit() {
   })
     .then((response) => {
       console.log("response", response);
-
       router.push({ path: "/login" });
     })
     .catch((error) => {
@@ -56,5 +55,5 @@ async function haddleSubmit() {
         console.log(JSON.stringify(error));
       }
     });
-}
+};
 </script>

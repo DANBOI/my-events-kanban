@@ -1,4 +1,5 @@
 //Compositional way to setup
+/*
 export const useAuthStore = defineStore("authStore", () => {
   //initial state
   const { email, token } =
@@ -18,4 +19,26 @@ export const useAuthStore = defineStore("authStore", () => {
   };
 
   return { authInfo, setAuthInfo, clearAuthInfo };
+
+});
+*/
+
+//optional way,more common,easy to use plugins
+export const useAuthStore = defineStore("authStore", {
+  state: () => ({
+    authInfo: {
+      email: "",
+      token: "",
+    },
+  }),
+  actions: {
+    setAuthInfo(email: string, token: string) {
+      this.authInfo = { email, token };
+    },
+    clearAuthInfo() {
+      this.authInfo = { email: "", token: "" };
+    },
+  },
+  //Pinia-Plugin-Persistedstate (persisted in cookies by default)
+  persist: true,
 });
