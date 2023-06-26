@@ -61,7 +61,7 @@ const navbarStyle = computed(() =>
 
 const handdleLogout = () => {
   authStore.clearAuthInfo();
-  notificationsStore.addNotification("logout!!");
+  notificationsStore.addNotification("logged out successfully!!");
   router.push({ path: "/" });
 };
 </script>

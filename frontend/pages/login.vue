@@ -11,19 +11,21 @@
     </Form>
   </main>
 </template>
+
 <script setup lang="ts">
 import { useAuthStore } from "@/stores/authStore";
-const apiUrl = import.meta.env.VITE_BASE_URL;
+import { useNotificationsStore } from "@/stores/notificationsStore";
 
+const apiUrl = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
+const notificationsStore = useNotificationsStore();
 const authStore = useAuthStore();
 
 const email = ref("");
 const password = ref("");
-const errors = ref<string[]>([]);
 
 const haddleLogin = async () => {
-  errors.value = [];
+  if (notificationsStore.notifications.length) return;
 
   await $fetch<{ auth_token: string }>(`${apiUrl}token/login/`, {
     method: "POST",
@@ -33,23 +35,22 @@ const haddleLogin = async () => {
     },
   })
     .then((response) => {
-      console.log("response", response.auth_token);
+      notificationsStore.addNotification("logged in successfully!!");
       authStore.setAuthInfo(email.value, response.auth_token);
-
-      // console.log(authStore.authInfo);
       router.push({ path: "/" });
     })
-    .catch((error) => {
-      if (error.response) {
-        for (const property in error.response._data) {
-          errors.value.push(`${property}: ${error.response._data[property]}`);
-        }
-        console.log(JSON.stringify(error.response));
-      } else if (error.message) {
-        errors.value.push("Something went wrong. Please try again");
-
-        console.log(JSON.stringify(error));
-      }
-    });
+    .catch((error) =>
+      error.response
+        ? Object.entries(error.response._data).forEach(([key, value]: any) =>
+            notificationsStore.addNotification(
+              `${key.toUpperCase()}: ${value.join("")}`,
+              "error"
+            )
+          )
+        : notificationsStore.addNotification(
+            "Something went wrong.Please try again",
+            "error"
+          )
+    );
 };
 </script>
