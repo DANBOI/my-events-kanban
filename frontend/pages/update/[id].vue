@@ -1,9 +1,9 @@
 <template>
   <main class="container mx-auto mb-10 px-6 py-10">
     <Form
-      headerText="create an event"
-      actionLabel="create"
-      :action="haddleCreate"
+      headerText="update an event"
+      actionLabel="update"
+      :action="haddleUpdate"
     >
       <FormItem
         v-model="event.category"
@@ -35,34 +35,31 @@ import { Category, Event } from "~/types";
 import { useAuthStore } from "@/stores/authStore";
 import { useNotificationsStore } from "~/stores/notificationsStore";
 
-const apiUrl = import.meta.env.VITE_BASE_URL;
-const authStore = useAuthStore();
-const notificationsStore = useNotificationsStore();
-
 //protect page
 definePageMeta({
   middleware: ["auth"],
   // or middleware: 'auth'
 });
 
-const event = ref<Event>({
-  category: "",
-  title: "",
-  date: "",
-  location: "",
-  description: "",
-  participation_fee: 0,
-  img_url: "",
-});
+const apiUrl = import.meta.env.VITE_BASE_URL;
+const route = useRoute();
+const authStore = useAuthStore();
+const notificationsStore = useNotificationsStore();
 
 //get selection options
 const { data: categories } = (await useFetch<Category[]>(
   `${apiUrl}events/categories/`
 )) as any;
 
-const haddleCreate = async () => {
+const eventId = route.params.id as string;
+const { data: currentEvent } = (await useFetch<Event>(
+  `${apiUrl}events/${eventId}/`
+)) as any;
+const event = ref<Event>(currentEvent);
+
+const haddleUpdate = async () => {
   if (notificationsStore.notifications.length) return;
-  //in case the html validation fails
+  // console.log(event.value);
   const { category, title, date, location } = event.value;
   if (!category || !title || !date || !location)
     return notificationsStore.addNotification(
@@ -70,11 +67,8 @@ const haddleCreate = async () => {
       "error"
     );
 
-  //api call
-  await useFetch<Event>(`${apiUrl}events/create/`, {
-    // lazy: true,
-    // server: false,
-    method: "POST",
+  await useFetch<Event>(`${apiUrl}events/${eventId}/update/`, {
+    method: "PUT",
     headers: {
       Authorization: `token ${authStore.authInfo.token}`,
       "Content-type": "application/json",
@@ -82,14 +76,12 @@ const haddleCreate = async () => {
     body: event.value,
   })
     .then((response) => {
-      console.log(response);
-
-      notificationsStore.addNotification("event created successfully!!");
+      // console.log(response);
+      notificationsStore.addNotification("event updated successfully!!");
       navigateTo("/my-events", { replace: true });
     })
     .catch((error) => {
-      console.log(error);
-
+      // console.log(error);
       error.response
         ? Object.entries(error.response._data).forEach(([key, value]: any) =>
             notificationsStore.addNotification(

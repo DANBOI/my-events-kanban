@@ -70,14 +70,18 @@ class AuthenticatedEventsView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-
         form = EventForm(request.data)
-
         if form.is_valid():
             event = form.save(commit=False)
             event.created_by = request.user
             event.save()
-
-            return Response({'status': 'success'}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'success'}, status=status.HTTP_201_CREATED)
         else:
-            return Response({'status': 'failed', 'errors': form.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'failed', 'errors': form.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        event = Event.objects.get(pk=pk, created_by=request.user)
+        # replace old data with new data
+        form = EventForm(request.data, instance=event)
+        form.save()
+        return Response({'message': 'updated'})

@@ -1,22 +1,26 @@
 <template>
   <div class="space-y-4">
-    <label :for="label" class="capitalize text-white">{{ label }}</label>
+    <label :for="label" class="capitalize text-white">{{
+      required ? label + " *" : label
+    }}</label>
 
     <textarea
       v-if="type === 'textarea'"
-      :value="modelValue"
       @input="handleUpdate"
+      :value="modelValue"
       :id="label"
-      rows="4"
       :placeholder="`enter ${label} here...`"
+      :required="required"
+      rows="4"
       class="formItem resize-none"
     ></textarea>
 
     <select
       v-else-if="type === 'select'"
-      :value="modelValue"
       @change="handleUpdate"
+      :value="modelValue"
       :id="label"
+      :required="required"
       class="formItem"
     >
       <option value="" disabled>-- Select {{ label }} --</option>
@@ -32,11 +36,12 @@
 
     <input
       v-else
-      :value="modelValue"
       @input="handleUpdate"
+      :value="modelValue"
       :id="label"
       :type="type || 'text'"
       :placeholder="`enter ${label} here...`"
+      :required="required"
       class="formItem"
     />
   </div>
@@ -45,9 +50,10 @@
 <script setup lang="ts">
 import { Category } from "~/types";
 
-const { type } = defineProps({
+defineProps({
   type: String,
   label: String,
+  required: Boolean,
   selectionData: Array<Category>,
   modelValue: [String, Number],
 });
