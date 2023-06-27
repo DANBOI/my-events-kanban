@@ -13,7 +13,7 @@
         :error="Boolean(error)"
         :pending="pending"
         :data="data"
-        editable
+        :editable="true"
       />
     </div>
   </main>

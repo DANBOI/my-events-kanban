@@ -4,7 +4,7 @@ export interface Category {
 }
 
 export interface Event {
-  id: number;
+  id?: number;
   category: string;
   title: string;
   date: string;

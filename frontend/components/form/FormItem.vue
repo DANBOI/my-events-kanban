@@ -19,8 +19,15 @@
       :id="label"
       class="formItem"
     >
-      <option value="" disabled>Select {{ label }}</option>
-      <option v-for="i in 4" :key="i">abc{{ i }}</option>
+      <option value="" disabled>-- Select {{ label }} --</option>
+      <option
+        v-if="selectionData?.length"
+        v-for="option in selectionData"
+        :key="option.id"
+        :value="option.id"
+      >
+        {{ option.name }}
+      </option>
     </select>
 
     <input
@@ -34,17 +41,22 @@
     />
   </div>
 </template>
+
 <script setup lang="ts">
-defineProps({
+import { Category } from "~/types";
+
+const { type } = defineProps({
   type: String,
   label: String,
-  modelValue: String,
+  selectionData: Array<Category>,
+  modelValue: [String, Number],
 });
 // defineProps(['modelValue'])
 const emit = defineEmits(["update:modelValue"]);
 const handleUpdate = (event: Event) =>
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 </script>
+
 <style scoped>
 .formItem {
   @apply w-full rounded px-6 py-4;

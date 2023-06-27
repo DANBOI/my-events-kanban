@@ -38,6 +38,6 @@ import { Event } from "~/types";
 
 defineProps<{
   event: Event;
-  editable?: Boolean;
+  editable: Boolean;
 }>();
 </script>

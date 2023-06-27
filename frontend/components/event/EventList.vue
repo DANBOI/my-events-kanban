@@ -9,7 +9,7 @@
       v-for="event in data"
       :event="event"
       :key="event.id"
-      :editable="editable"
+      :editable="editable || false"
     />
     <p v-else class="message">No events Found</p>
   </div>
