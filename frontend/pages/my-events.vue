@@ -9,11 +9,38 @@
       </span>
     </h1>
     <div class="container mx-auto py-10 text-center">
-      <EventList editable />
+      <EventList
+        :error="Boolean(error)"
+        :pending="pending"
+        :data="data"
+        editable
+      />
     </div>
   </main>
 </template>
-<script>
-export default {};
+
+<script setup lang="ts">
+import { Event } from "~/types";
+import { useAuthStore } from "@/stores/authStore";
+
+const apiUrl = import.meta.env.VITE_BASE_URL;
+const authStore = useAuthStore();
+
+//protect page
+definePageMeta({
+  middleware: ["auth"],
+  // or middleware: 'auth'
+});
+
+const { error, pending, data } = await useFetch<Event[]>(
+  `${apiUrl}events/my_events/`,
+  {
+    lazy: true,
+    server: false, //don't use SSR here
+    headers: {
+      Authorization: `token ${authStore.authInfo.token}`,
+      "Content-type": "application/json",
+    },
+  }
+);
 </script>
-<style lang=""></style>

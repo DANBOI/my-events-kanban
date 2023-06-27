@@ -41,6 +41,4 @@ const { error, pending, data } = await useFetch<Event[]>(
     server: false, //don't use SSR here
   }
 );
-// console.log(error, pending, data);
 </script>
-<!-- ${process.env.BACKEND_API_URL} -->

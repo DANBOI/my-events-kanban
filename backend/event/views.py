@@ -1,4 +1,5 @@
 # from django.shortcuts import render
+from rest_framework import status, authentication, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Category, Event
@@ -20,6 +21,18 @@ class NewestEventsView(APIView):
         # slice first 5 rows
         events = Event.objects.all()[0:4]
         serializer = EventSerializer(events, many=True)
+
+        return Response(serializer.data)
+
+
+class MyEventsView(APIView):
+    # for authentication protected page
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        jobs = Event.objects.filter(created_by=request.user)
+        serializer = EventSerializer(jobs, many=True)
 
         return Response(serializer.data)
 

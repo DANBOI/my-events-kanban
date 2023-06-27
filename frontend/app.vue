@@ -49,7 +49,6 @@ import { useNotificationsStore } from "@/stores/notificationsStore";
 
 const authStore = useAuthStore();
 const notificationsStore = useNotificationsStore();
-const router = useRouter();
 const route = useRoute();
 
 //change header class based on page path
@@ -62,6 +61,6 @@ const navbarStyle = computed(() =>
 const handdleLogout = () => {
   authStore.clearAuthInfo();
   notificationsStore.addNotification("logged out successfully!!");
-  router.push({ path: "/" });
+  navigateTo("/");
 };
 </script>
