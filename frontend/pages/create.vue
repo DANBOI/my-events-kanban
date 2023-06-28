@@ -71,7 +71,7 @@ const haddleCreate = async () => {
     );
 
   //api call
-  await useFetch<Event>(`${apiUrl}events/create/`, {
+  const { error } = await useFetch(`${apiUrl}events/create/`, {
     // lazy: true,
     // server: false,
     method: "POST",
@@ -80,27 +80,17 @@ const haddleCreate = async () => {
       "Content-type": "application/json",
     },
     body: event.value,
-  })
-    .then((response) => {
-      console.log(response);
+  });
 
-      notificationsStore.addNotification("event created successfully!!");
-      navigateTo("/my-events", { replace: true });
-    })
-    .catch((error) => {
-      console.log(error);
+  if (error?.value)
+    return notificationsStore.addNotification(
+      `Faild to create event: ${
+        error.value.statusMessage || "Something went wrong.Please try again"
+      }`,
+      "error"
+    );
 
-      error.response
-        ? Object.entries(error.response._data).forEach(([key, value]: any) =>
-            notificationsStore.addNotification(
-              `${key.toUpperCase()}: ${value.join("")}`,
-              "error"
-            )
-          )
-        : notificationsStore.addNotification(
-            "Something went wrong.Please try again",
-            "error"
-          );
-    });
+  notificationsStore.addNotification("Event created successfully!!");
+  navigateTo("/my-events", { replace: true });
 };
 </script>

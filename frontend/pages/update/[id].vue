@@ -67,32 +67,25 @@ const haddleUpdate = async () => {
       "error"
     );
 
-  await useFetch<Event>(`${apiUrl}events/${eventId}/update/`, {
+  //api call
+  const { error } = await useFetch(`${apiUrl}events/${eventId}/update/`, {
     method: "PUT",
     headers: {
       Authorization: `token ${authStore.authInfo.token}`,
       "Content-type": "application/json",
     },
     body: event.value,
-  })
-    .then((response) => {
-      // console.log(response);
-      notificationsStore.addNotification("event updated successfully!!");
-      navigateTo("/my-events", { replace: true });
-    })
-    .catch((error) => {
-      // console.log(error);
-      error.response
-        ? Object.entries(error.response._data).forEach(([key, value]: any) =>
-            notificationsStore.addNotification(
-              `${key.toUpperCase()}: ${value.join("")}`,
-              "error"
-            )
-          )
-        : notificationsStore.addNotification(
-            "Something went wrong.Please try again",
-            "error"
-          );
-    });
+  });
+
+  if (error?.value)
+    return notificationsStore.addNotification(
+      `Faild to update event: ${
+        error.value.statusMessage || "Something went wrong.Please try again"
+      }`,
+      "error"
+    );
+
+  notificationsStore.addNotification("Event updated successfully!!");
+  navigateTo("/my-events", { replace: true });
 };
 </script>

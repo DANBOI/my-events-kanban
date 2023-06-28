@@ -21,7 +21,7 @@ class CategoriesView(APIView):
 class NewestEventsView(APIView):
     def get(self, request, format=None):
         # slice first 5 rows
-        events = Event.objects.all()[0:4]
+        events = Event.objects.all()[0:5]
         serializer = EventSerializer(events, many=True)
 
         return Response(serializer.data)
@@ -85,3 +85,8 @@ class AuthenticatedEventsView(APIView):
         form = EventForm(request.data, instance=event)
         form.save()
         return Response({'message': 'updated'})
+
+    def delete(self, request, pk):
+        event = Event.objects.get(pk=pk, created_by=request.user)
+        event.delete()
+        return Response({'message': 'deleted'})

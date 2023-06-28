@@ -13,7 +13,8 @@
         :error="Boolean(error)"
         :pending="pending"
         :data="data"
-        :editable="true"
+        :haddleDelete="haddleDelete"
+        editable
       />
     </div>
   </main>
@@ -22,9 +23,11 @@
 <script setup lang="ts">
 import { Event } from "~/types";
 import { useAuthStore } from "@/stores/authStore";
+import { useNotificationsStore } from "@/stores/notificationsStore";
 
 const apiUrl = import.meta.env.VITE_BASE_URL;
 const authStore = useAuthStore();
+const notificationsStore = useNotificationsStore();
 
 //protect page
 definePageMeta({
@@ -43,4 +46,40 @@ const { error, pending, data } = await useFetch<Event[]>(
     },
   }
 );
+
+const haddleDelete = async (id: number) => {
+  //on processing or not be confirmed then stop
+  if (
+    notificationsStore.notifications.length ||
+    !confirm("Are you sure you want to delete this event?")
+  )
+    return;
+
+  //api call
+  const { error } = await useFetch(`${apiUrl}events/${id}/delete/`, {
+    // lazy: true,
+    // server: false,
+    method: "DELETE",
+    headers: {
+      Authorization: `token ${authStore.authInfo.token}`,
+      "Content-type": "application/json",
+    },
+  });
+
+  // console.log("🤣:", error.value);
+  if (error?.value)
+    return notificationsStore.addNotification(
+      `Faild to delete event: ${
+        error.value.statusMessage || "Something went wrong.Please try again"
+      }`,
+      "error"
+    );
+
+  //remove from display without reload
+  data.value?.splice(
+    data.value.findIndex((e) => e.id === id),
+    1
+  );
+  notificationsStore.addNotification("Event deleted successfully!!");
+};
 </script>

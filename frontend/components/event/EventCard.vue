@@ -37,7 +37,12 @@
         class="rounded bg-cyan-700 px-4 py-2"
         >Update</NuxtLink
       >
-      <button class="rounded bg-rose-700 px-4 py-2">Delete</button>
+      <button
+        @click="$emit('delete-event', event.id)"
+        class="rounded bg-rose-700 px-4 py-2"
+      >
+        Delete
+      </button>
     </div>
   </article>
 </template>
@@ -45,8 +50,8 @@
 <script setup lang="ts">
 import { Event } from "~/types";
 
-defineProps<{
+const { event } = defineProps<{
   event: Event;
-  editable: Boolean;
+  editable: boolean;
 }>();
 </script>
