@@ -36,7 +36,7 @@
       </div>
     </aside>
 
-    <section class="lg:col-span-3">
+    <section class="text-center lg:col-span-3">
       <EventList :error="Boolean(error)" :pending="pending" :data="events" />
     </section>
   </main>

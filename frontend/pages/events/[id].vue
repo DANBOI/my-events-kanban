@@ -15,87 +15,44 @@
         <div
           class="h-40 w-40 overflow-hidden rounded-full border-4 border-white md:h-80 md:w-80"
         >
-          <nuxt-img
+          <NuxtImg
             :src="event.img_url || '/img/coding-event.jpg'"
             alt="image"
             class="h-full w-full object-cover"
           />
         </div>
         <ul
-          class="flex flex-1 flex-col items-center justify-center gap-8 text-primary md:items-start"
+          class="flex flex-1 flex-col items-start justify-center gap-4 whitespace-nowrap px-6 text-2xl text-primary md:gap-8"
         >
-          <li
-            class="flex flex-col items-center text-2xl md:items-start md:text-start"
-          >
-            <span class="block">
-              <Icon
-                name="material-symbols:category-outline"
-                class="h-6 w-6 text-accent"
-              />
-            </span>
-            <span class="block"
-              ><time>{{ event.category }}</time></span
-            >
-          </li>
-          <li
-            class="flex flex-col items-center text-2xl md:items-start md:text-start"
-          >
-            <span class="block">
-              <Icon
-                name="material-symbols:event-available-sharp"
-                class="h-6 w-6 text-accent"
-              />
-            </span>
-            <span class="block"
-              ><time>{{ event.date }}</time></span
-            >
-          </li>
-          <li
-            class="flex flex-col items-center text-2xl md:items-start md:text-start"
-          >
-            <span class="block">
-              <Icon
-                name="material-symbols:pin-drop-outline"
-                class="h-6 w-6 text-accent"
-              />
-            </span>
-            <span class="block"
-              ><time>{{ event.location }}</time></span
-            >
-          </li>
-          <li
-            class="flex flex-col items-center text-2xl md:items-start md:text-start"
-          >
-            <span class="block">
-              <Icon
-                name="ri:money-dollar-box-line"
-                class="h-6 w-6 text-accent"
-              />
-            </span>
-            <span class="block"
-              ><time>{{ event.participation_fee }}</time></span
-            >
-          </li>
+          <EventItem
+            type="Category"
+            :label="categories?.find((c: Category) => String(c.id) == event?.category)
+                ?.name || 'no category'"
+          />
+          <EventItem type="Date" :label="event.date" />
+          <EventItem type="Location" :label="event.location" />
+          <EventItem type="Money" :label="event.participation_fee || 'free'" />
         </ul>
       </figure>
-      <div class="mx-auto mt-20 w-[90%] max-w-2xl text-center text-2xl">
+      <hr class="my-12 border border-gray-50" />
+      <div class="mx-auto w-[90%] max-w-2xl text-2xl md:text-center">
         <p>
           {{ event.description }}
         </p>
       </div>
       <div class="mx-auto my-12 w-[90%] max-w-2xl text-center">
-        <button
-          type="submit"
+        <a
+          href="mailto:abc@test.com"
           class="rounded bg-accent px-6 py-2 text-xl font-medium text-white shadow-md hover:bg-accent/80 active:bg-accent/60 md:text-2xl"
         >
           Apply to the event
-        </button>
+        </a>
       </div>
     </template>
   </main>
 </template>
 <script setup lang="ts">
-import { Event } from "~/types";
+import { Category, Event } from "~/types";
 const route = useRoute();
 const apiUrl = import.meta.env.VITE_BASE_URL;
 const eventId = route.params.id as string;
@@ -104,4 +61,9 @@ const { data: event } = await useFetch<Event>(`${apiUrl}events/${eventId}/`, {
   lazy: true,
   server: false, //don't use SSR here
 });
+
+//use cached category data
+const { data: categories } = useNuxtData<Category[]>("categories");
 </script>
+
+<style scoped></style>
