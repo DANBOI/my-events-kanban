@@ -12,9 +12,19 @@
         :selectionData="categories"
         required
       />
-      <FormItem v-model.trim="event.title" label="title" required />
+      <FormItem
+        v-model.trim="event.title"
+        label="title"
+        maxlength="15"
+        required
+      />
       <FormItem v-model="event.date" type="date" label="date" required />
-      <FormItem v-model.trim="event.location" label="location" required />
+      <FormItem
+        v-model.trim="event.location"
+        label="location"
+        maxlength="20"
+        required
+      />
       <FormItem
         v-model.trim="event.description"
         type="textarea"
@@ -25,7 +35,7 @@
         type="number"
         label="participation fee"
       />
-      <FormItem v-model.trim="event.img_url" type="url" label="image url" />
+      <FormItem v-model.trim="event.image_url" type="url" label="image url" />
     </Form>
   </main>
 </template>
@@ -52,7 +62,7 @@ const event = ref<Event>({
   location: "",
   description: "",
   participation_fee: 0,
-  img_url: "",
+  image_url: "",
 });
 
 //get selection options

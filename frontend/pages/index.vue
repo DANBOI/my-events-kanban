@@ -31,6 +31,7 @@
     </section>
   </main>
 </template>
+
 <script setup lang="ts">
 import { Event } from "~/types";
 const apiUrl = import.meta.env.VITE_BASE_URL;

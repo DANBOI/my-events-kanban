@@ -16,7 +16,7 @@
           class="h-40 w-40 overflow-hidden rounded-full border-4 border-white md:h-80 md:w-80"
         >
           <NuxtImg
-            :src="event.img_url || '/img/coding-event.jpg'"
+            :src="event.image_url || '/img/placeholder.jpg'"
             alt="image"
             class="h-full w-full object-cover"
           />
@@ -51,6 +51,7 @@
     </template>
   </main>
 </template>
+
 <script setup lang="ts">
 import { Category, Event } from "~/types";
 const route = useRoute();

@@ -1,7 +1,5 @@
 <template>
   <main class="container mx-auto px-6 py-10">
-    <!-- <p>{{ email }}</p>
-    <p>{{ password }}</p> -->
     <Form
       headerText="welcome to kanban"
       actionLabel="sign up"

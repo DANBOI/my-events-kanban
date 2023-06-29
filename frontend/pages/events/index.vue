@@ -1,9 +1,9 @@
 <template>
   <main
-    class="container mx-auto grid justify-items-stretch gap-8 px-6 py-10 lg:grid-cols-4"
+    class="container relative mx-auto grid justify-items-stretch gap-8 px-6 py-10 xl:grid-cols-4 xl:gap-40"
   >
     <aside
-      class="rounded bg-gradient-to-br from-secondary/80 to-accent p-6 shadow-md"
+      class="sticky top-20 rounded bg-gradient-to-br from-secondary/80 to-accent p-6 shadow-md xl:fixed xl:top-28"
     >
       <form class="relative" @submit.prevent="">
         <div class="absolute left-4 top-4">
@@ -20,7 +20,7 @@
       <hr class="my-6 opacity-30" />
       <h3 class="mt-6 text-xl text-white">Categories</h3>
       <div
-        class="mt-6 flex flex-wrap gap-2 text-center capitalize text-white lg:flex-col"
+        class="mt-6 flex flex-wrap gap-2 text-center capitalize text-white xl:flex-col"
       >
         <p
           v-for="category in categories"
@@ -36,7 +36,7 @@
       </div>
     </aside>
 
-    <section class="text-center lg:col-span-3">
+    <section class="text-center xl:col-span-3 xl:col-start-2">
       <EventList :error="Boolean(error)" :pending="pending" :data="events" />
     </section>
   </main>

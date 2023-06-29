@@ -25,7 +25,7 @@
         type="number"
         label="participation fee"
       />
-      <FormItem v-model.trim="event.img_url" type="url" label="image url" />
+      <FormItem v-model.trim="event.image_url" type="url" label="image url" />
     </Form>
   </main>
 </template>

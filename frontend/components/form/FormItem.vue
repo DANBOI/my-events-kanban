@@ -40,7 +40,12 @@
       :value="modelValue"
       :id="label"
       :type="type || 'text'"
-      :placeholder="`enter ${label} here...`"
+      :maxlength="maxlength"
+      :placeholder="
+        maxlength
+          ? `no more than ${maxlength} characters`
+          : `enter ${label} here...`
+      "
       :required="required"
       class="formItem"
     />
@@ -53,6 +58,7 @@ import { Category } from "~/types";
 defineProps({
   type: String,
   label: String,
+  maxlength: String,
   required: Boolean,
   selectionData: Array<Category>,
   modelValue: [String, Number],

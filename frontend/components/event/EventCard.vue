@@ -22,12 +22,12 @@
     </NuxtLink>
 
     <!-- edit panel -->
-    <div v-if="editable" class="space-x-4 p-6 text-white">
-      <NuxtLink
+    <div v-if="editable" class="mr-6 space-x-4 p-6 text-white md:w-1/3">
+      <!-- <NuxtLink
         :to="`/events/${event.id}`"
         class="rounded bg-teal-700 px-4 py-2"
         >Details</NuxtLink
-      >
+      > -->
       <NuxtLink
         :to="`/update/${event.id}`"
         class="rounded bg-cyan-700 px-4 py-2"
@@ -42,7 +42,7 @@
     </div>
     <NuxtImg
       v-else
-      :src="`${event.img_url || '/img/coding-event.jpg'}`"
+      :src="`${event.image_url || '/img/placeholder.jpg'}`"
       alt="event image"
       class="h-48 w-full object-cover md:h-36 md:w-1/3"
     />

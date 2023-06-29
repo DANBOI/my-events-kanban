@@ -56,7 +56,7 @@ const route = useRoute();
 //change header class based on page path
 const navbarStyle = computed(() =>
   route.path !== "/"
-    ? "sticky top-0 shadow-lg bg-gradient-to-r from-secondary/80 to-black"
+    ? "sticky top-0 shadow-lg bg-gradient-to-r from-secondary/80 to-black z-10"
     : "fixed w-full"
 );
 

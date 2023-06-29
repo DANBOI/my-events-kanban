@@ -11,5 +11,5 @@ export interface Event {
   location: string;
   description?: string;
   participation_fee?: number;
-  img_url?: string;
+  image_url?: string;
 }
