@@ -8,7 +8,7 @@
         Here is a list of the events you have registered.
       </span>
     </h1>
-    <div class="container mx-auto py-10 text-center">
+    <div class="container mx-auto px-6 py-10 text-center">
       <EventList
         :error="Boolean(error)"
         :pending="pending"

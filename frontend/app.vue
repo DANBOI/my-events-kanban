@@ -39,6 +39,8 @@
       </nav>
     </div>
   </header>
+  <!-- progress bar on page navigation -->
+  <NuxtLoadingIndicator />
   <NuxtPage />
   <Notifications />
 </template>

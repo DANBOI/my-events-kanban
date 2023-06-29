@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Category, Event } from "~/types";
+import { Event } from "~/types";
 import { useAuthStore } from "@/stores/authStore";
 import { useNotificationsStore } from "~/stores/notificationsStore";
 
@@ -56,9 +56,7 @@ const event = ref<Event>({
 });
 
 //get selection options
-const { data: categories } = (await useFetch<Category[]>(
-  `${apiUrl}events/categories/`
-)) as any;
+const { data: categories } = useNuxtData("categories");
 
 const haddleCreate = async () => {
   if (notificationsStore.notifications.length) return;

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { Event } from "~/types";
+import { Category, Event } from "~/types";
 
 const { haddleDelete } = defineProps<{
   editable?: boolean;
@@ -25,7 +25,13 @@ const { haddleDelete } = defineProps<{
   error: boolean;
 }>();
 
-// console.log("LIST:", haddleDelete);
+const apiUrl = import.meta.env.VITE_BASE_URL;
+//cache category data
+await useFetch<Category[]>(`${apiUrl}events/categories/`, {
+  lazy: true,
+  server: false,
+  key: "categories",
+});
 </script>
 
 <style scoped>

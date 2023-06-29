@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Category, Event } from "~/types";
+import { Event } from "~/types";
 import { useAuthStore } from "@/stores/authStore";
 import { useNotificationsStore } from "~/stores/notificationsStore";
 
@@ -47,9 +47,7 @@ const authStore = useAuthStore();
 const notificationsStore = useNotificationsStore();
 
 //get selection options
-const { data: categories } = (await useFetch<Category[]>(
-  `${apiUrl}events/categories/`
-)) as any;
+const { data: categories } = useNuxtData("categories");
 
 const eventId = route.params.id as string;
 const { data: currentEvent } = (await useFetch<Event>(

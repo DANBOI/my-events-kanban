@@ -1,32 +1,32 @@
 <template>
   <article
-    class="flex items-center justify-between gap-8 rounded bg-white p-6 shadow-lg transition"
+    class="items-center justify-between gap-8 divide-y overflow-hidden rounded bg-white shadow-lg transition hover:bg-white/80 md:flex md:divide-x md:divide-y-0"
   >
     <NuxtLink
-      class="flex flex-1 items-center justify-between"
+      class="flex flex-1 items-center justify-between gap-2 p-6"
       :to="`/events/${event.id}`"
     >
-      <div>
+      <div class="flex-1">
         <h3 class="mb-2 text-xl font-semibold">{{ event.title }}</h3>
-        <p class="text-secondary/80">{{ event.category }}</p>
+        <p>{{ categoryName }}</p>
       </div>
 
-      <div>
-        <p class="mb-2">{{ event.date }}</p>
+      <div class="flex-1">
+        <p class="mb-2 text-xl">{{ event.date }}</p>
         <p>{{ event.location }}</p>
       </div>
 
-      <div>
+      <div class="flex-1 text-2xl">
         <p>
           {{
             event.participation_fee ? `$ ${event.participation_fee}` : "free"
           }}
         </p>
       </div>
-      <p>{{ event.img_url || "no image" }}</p>
     </NuxtLink>
 
-    <div v-show="editable" class="space-x-4 text-white">
+    <!-- edit panel -->
+    <div v-if="editable" class="space-x-4 p-6 text-white">
       <NuxtLink
         :to="`/events/${event.id}`"
         class="rounded bg-teal-700 px-4 py-2"
@@ -44,14 +44,29 @@
         Delete
       </button>
     </div>
+    <NuxtImg
+      v-else
+      :src="`${event.img_url || '/img/coding-event.jpg'}`"
+      alt="event image"
+      class="h-48 w-full object-cover md:h-36 md:w-1/3"
+    />
   </article>
 </template>
 
 <script setup lang="ts">
-import { Event } from "~/types";
+import { Category, Event } from "~/types";
 
 const { event } = defineProps<{
+  // categoryName: string;
   event: Event;
   editable: boolean;
 }>();
+
+//use cached category data
+const { data: categories } = useNuxtData<Category[]>("categories");
+const categoryName = computed(
+  () =>
+    categories?.value?.find((c: Category) => c.id === +event.category)?.name ||
+    "No category"
+);
 </script>

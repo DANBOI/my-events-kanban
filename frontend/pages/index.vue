@@ -25,7 +25,7 @@
       </ClientOnly>
     </section>
 
-    <section class="container mx-auto py-16 text-center">
+    <section class="container mx-auto px-6 py-16 text-center">
       <h2 class="mb-8 text-4xl">Newest events</h2>
       <EventList :error="Boolean(error)" :pending="pending" :data="data" />
     </section>
