@@ -11,7 +11,7 @@
       </div>
 
       <div class="flex-1">
-        <EventItem type="Category" :label="categoryName" />
+        <EventItem type="Category" :label="event.category_name" />
         <EventItem type="Money" :label="event.participation_fee || 'free'" />
       </div>
 
@@ -50,19 +50,10 @@
 </template>
 
 <script setup lang="ts">
-import { Category, Event } from "~/types";
+import { Event } from "~/types";
 
 const { event } = defineProps<{
-  // categoryName: string;
   event: Event;
   editable: boolean;
 }>();
-
-//use cached category data
-const { data: categories } = useNuxtData<Category[]>("categories");
-const categoryName = computed(
-  () =>
-    categories?.value?.find((c: Category) => c.id === +event.category)?.name ||
-    "No category"
-);
 </script>

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
   ],
   pinia: {
-    autoImports: ["defineStore"],
+    autoImports: ["defineStore", "storeToRefs"],
   },
   css: ["~/assets/css/main.css"],
   postcss: {
