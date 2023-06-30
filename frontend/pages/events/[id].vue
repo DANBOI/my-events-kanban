@@ -1,8 +1,8 @@
 <template>
   <main>
-    <client-only v-if="!event">
+    <ClientOnly v-if="!event">
       <div class="grid h-[50vh] place-items-center text-2xl">Loading...</div>
-    </client-only>
+    </ClientOnly>
     <template v-else>
       <h1
         class="h-[max(15rem,20vh)] w-full bg-gradient-to-br from-secondary to-accent pt-12 text-center text-4xl text-white md:text-5xl"
