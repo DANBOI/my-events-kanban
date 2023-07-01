@@ -12,7 +12,7 @@
         <input
           v-model="searchTextRef"
           type="search"
-          placeholder="Search..."
+          placeholder="Start typing..."
           class="w-full rounded py-4 pl-12 pr-6"
         />
       </form>
