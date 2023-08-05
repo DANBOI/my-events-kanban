@@ -29,3 +29,5 @@ __pycache__/
 
 #Local DB
 *.sqlite3
+# dump data
+data.json
